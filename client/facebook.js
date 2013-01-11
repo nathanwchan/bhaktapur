@@ -14,17 +14,18 @@ var facebook = (function () {
     return Session.get("userName") || null;
   };
 
-  var setUserName = function (userName) {
-    Session.set("userName", userName);
-  };
-
   var getUserId = function () {
     return Session.get("id") || null;
   };
 
-  var setUserId = function (id) {
-    Session.set("id", id);
-    Volunteers.insert({id: id});
+  var setUserInfo = function (json) {
+    userid = json.id;
+    username = json.name;
+    Session.set("id", userid);
+    Session.set("userName", username);
+    if (Volunteers.findOne({id: userid}) == null) {
+      Volunteers.insert({id: userid, name: username});
+    }
   };
 
   var fetchInfo = function () {
@@ -39,8 +40,7 @@ var facebook = (function () {
   var processInfo = function (error, result) {
     if (result.statusCode === 200) {
       var json = JSON.parse(result.content);
-      setUserId(json.id);
-      setUserName(json.name);
+      setUserInfo(json);
     }
   };
 
