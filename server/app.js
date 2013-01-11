@@ -1,5 +1,16 @@
 (function () {
   if (Meteor.isServer) {
+    // TEMPORARY FOR TESTING
+    Meteor.startup(function () {
+      if (Volunteers.find().count() === 0) {
+        var volunteers = [{id: "502291341", name: "Aswath Krishnan"},
+        {id: "11520487", name: "Jenny Chen"}
+        ];
+        for (var i = 0; i < volunteers.length; i++)
+          Volunteers.insert(volunteers[i]);
+      }
+    });
+
     // serve channel.html file, based on http://stackoverflow.com/a/13871399/145349
     var connect = __meteor_bootstrap__.require("connect");
 
