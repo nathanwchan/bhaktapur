@@ -68,16 +68,17 @@
     <div id="fb-root"></div>
   {{/constant}}
   <div id="outer">
-    {{> volunteerlist}}
     {{> fbLogin}}
+    <hr>
+    {{> volunteerlist}}
   </div>
 </body>
 
 
 <template name="volunteerlist">
   <div class="volunteerlist">
-    <span>Volunteers:</span>
     {{#if volunteersLoaded}}
+      <span>Volunteers:</span>
       {{#each volunteers}}
         {{> volunteer}}
       {{/each}}

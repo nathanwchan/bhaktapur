@@ -72,6 +72,10 @@ Template.fbLogin.isLogged = function () {
   return facebook.getAccessToken() !== null;
 };
 
+Template.fbLogin.userId = function () {
+  return facebook.getUserId() || '';
+};
+
 Template.fbLogin.userName = function () {
   return facebook.getUserName() || '';
 };

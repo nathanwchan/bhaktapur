@@ -23,9 +23,6 @@ var facebook = (function () {
     username = json.name;
     Session.set("id", userid);
     Session.set("userName", username);
-    if (Volunteers.findOne({id: userid}) == null) {
-      Volunteers.insert({id: userid, name: username});
-    }
   };
 
   var fetchInfo = function () {
