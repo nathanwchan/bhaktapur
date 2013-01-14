@@ -1,7 +1,16 @@
 <template name="fbLogin">
   {{#if isLogged}}
-  	<img src="https://graph.facebook.com/{{userId}}/picture?type=square" class="rounded3" height="40" width="40"/>
-    {{userName}} <button id="logout-button" class="btn btn-danger" type="button">Logout</button>
+	<div class="btn-group">
+		<button class="btn primary">
+			<img src="https://graph.facebook.com/{{userId}}/picture?type=square" class="rounded3" height="18" width="18" /> {{userName}}
+		</button>
+	  	<button class="btn primary dropdown-toggle" data-toggle="dropdown" height="30">
+	  		<span class="caret" margin="5"></span>
+	  	</button>
+	  	<ul class="dropdown-menu pull-right">
+	  		<li><a id="logout-button">Logout</a></li>
+		</ul>
+	</div>
   {{else}}
     <button id="login-button" class="btn btn-primary" type="button"><i class="icon-facebook-sign icon-white"></i>  Sign in with Facebook</button>
   {{/if}}

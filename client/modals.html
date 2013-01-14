@@ -1,0 +1,16 @@
+<template name="modals">
+  <div class="modal hide fade add-project-modal" id="addproject">
+      <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">×</button>
+          <h2>Add a new project!</h2>
+      </div>
+      <div class="modal-body">
+           <p>Name: <input id="name" type="text" placeholder="Bed Bug Project" autocomplete="off"><span id="name_error" align="left" style="color: red; font-size: 16; margin-left: 10px;"></span></p>
+           <p>Description: <textarea id="description" placeholder="Replace 10 bunk-beds in little boys' room..." rows="3"></textarea></p>
+      </div>
+      <div class="modal-footer">
+          <a class="btn" data-dismiss="modal">Close</a>
+          <input type="submit" class="btn btn-primary add" style="width: 75px;" value="Submit &raquo;">
+      </div>
+  </div>
+</template>

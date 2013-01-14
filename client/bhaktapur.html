@@ -17,32 +17,49 @@
 
     <link href="/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
     <link href="/bootstrap/css/mystyle.css" rel="stylesheet" type="text/css"/>
-    
-<!--        <style type="text/css">
-        body {
-            padding-top: 0px;
-            padding-bottom: 40px;
-        }
-        .sidebar-nav-fixed {
-            padding: 9px 0;
-            position:fixed;
-            left:20px;
-            top:60px;
-            width:250px;
-        }
-        .row-fluid > .span-fixed-sidebar {
-            margin-left: 290px;
-        }
-
-    </style>-->
     <link href="/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" type="text/css"/>
     
+    <style type="text/css">
+      body {
+        padding-top: 40px;
+        padding-bottom: 400px;
+      }
+      a[name] {
+        padding-top: 40px;
+        margin-top: -40px;
+        display: inline-block; /* required for webkit browsers */
+      }
+    </style>
+
     <!-- ADD GOOGLE ANALYTICS -->
 
 </head>
 
 <body>
-  <!--<div id="myCarousel" class="carousel slide">
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="brand" href="#">Bhaktapur</a>
+        <div class="nav-collapse collapse">
+          <ul class="nav">
+            <li class="active">
+              <a href="#">Home</a>
+            </li>
+            <li class="">
+              <a href="#volunteers">Past Volunteers</a>
+            </li>
+            <li class="">
+              <a href="#projects">Past Projects</a>
+            </li>
+          </ul>
+        </div>
+        <div class="pull-right">
+          {{> fbLogin}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="myCarousel" class="carousel slide">
     <div class="carousel-inner">
       <div class="item">
         <img src="../images/carousel1.jpg" alt="">
@@ -62,40 +79,17 @@
     </div>
     <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
     <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
-  </div>-->
+  </div>
 
   {{#constant}}
     <div id="fb-root"></div>
   {{/constant}}
-  <div id="outer">
-    {{> fbLogin}}
+  <div class="container">
+    {{> volunteers}}
     <hr>
-    {{> volunteerlist}}
+    {{> projects}}
   </div>
+
+  {{> modals}}
 </body>
 
-
-<template name="volunteerlist">
-  <div class="volunteerlist">
-    {{#if volunteersLoaded}}
-      <span>Volunteers:</span>
-      {{#each volunteers}}
-        {{> volunteer}}
-      {{/each}}
-    {{else}}
-      <div class="row-fluid">
-        <div class="events-info-message">
-          <i class="icon-spinner icon-spin icon-2x pull-left"></i> Loading past volunteers...
-        </div>
-      </div>
-    {{/if}}
-  </div>
-</template>
-
-<template name="volunteer">
-  <div class="volunteer">
-    <img src="https://graph.facebook.com/{{id}}/picture?type=square" class="rounded3" height="40" width="40"/>
-    <span class="id">{{id}}</span>
-    <span class="name">{{name}}</span>
-  </div>
-</template>
