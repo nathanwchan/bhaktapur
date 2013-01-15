@@ -42,12 +42,16 @@ Template.users.usersLoaded = function () {
 
 Template.modals.events = {
 	'click input.add': function () {
+		$('#submitButton').attr("disabled", true);
+		$('#submitSpinner').css("visibility", "visible")
 		Meteor.call('addProject',
 			$('input#name').val(),
 			$('textarea#description').val(),
 			function (error, result) {
 				if (!result) {
 					$('#name_error').prop("innerHTML", "Give the project a name!");
+					$('#submitButton').removeAttr("disabled");
+					$('#submitSpinner').css("visibility", "hidden")
 				}
 				else {
 					$('#addproject').modal('hide');
