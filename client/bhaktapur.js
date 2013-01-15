@@ -1,9 +1,19 @@
-Meteor.subscribe("volunteers", function(){
-	Session.set('volunteersLoaded', true);
+Meteor.subscribe("users", function(){
+	Session.set('usersLoaded', true);
+	userid = Session.get("id");
+	username = Session.get("userName")
+	if (!!userid && !!username)
+	{
+		Meteor.call('addUser', userid, username);
+	}
 });
 
 Meteor.subscribe("projects", function(){
 	Session.set('projectsLoaded', true);
+});
+
+Meteor.subscribe("volunteers", function(){
+	Session.set('volunteersLoaded', true);
 });
 
 Template.volunteers.volunteers = function () {
@@ -20,6 +30,14 @@ Template.projects.projects = function () {
 
 Template.projects.projectsLoaded = function () {
 	return Session.get('projectsLoaded');
+};
+
+Template.users.users = function () {
+	return Users.find({}, {sort: {name: -1}});
+};
+
+Template.users.usersLoaded = function () {
+	return Session.get('usersLoaded');
 };
 
 Template.modals.events = {

@@ -1,21 +1,21 @@
-<template name="volunteers">
-  <a name="volunteers"></a>
-  <div class="volunteers">
-    {{#if volunteersLoaded}}
-      <span>Volunteers:</span>
-      {{#each volunteers}}
-        {{> volunteer}}
+<template name="users">
+  <a name="users"></a>
+  <div class="users">
+    {{#if usersLoaded}}
+      <span>Users:</span>
+      {{#each users}}
+        {{> user}}
       {{/each}}
     {{else}}
       <div class="row-fluid">
-        <i class="icon-spinner icon-spin icon-2x pull-left"></i> Loading past volunteers...
+        <i class="icon-spinner icon-spin icon-2x pull-left"></i> Loading users...
       </div>
     {{/if}}
   </div>
 </template>
 
-<template name="volunteer">
-  <div class="volunteer">
+<template name="user">
+  <div class="user">
     <a href="https://www.facebook.com/{{id}}/" target="_blank"><img src="https://graph.facebook.com/{{id}}/picture?type=square" class="rounded3" height="40" width="40"></a>
     <span class="id">{{id}}</span>
     <span class="name">{{name}}</span>

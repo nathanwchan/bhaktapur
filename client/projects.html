@@ -1,17 +1,25 @@
 <template name="projects">
   <a name="projects"></a>
   <div class="projects">
-    <a data-toggle="modal" href="#addproject" id="addprojectbutton"><button class="btn btn-primary" type="button">+ New Project</button></a><br>
+    <ul class="nav nav-tabs">
+      <li class="active">
+        <a href="#projects">Current Projects</a>
+      </li>
+      <li>
+        <a href="#projects">Completed Projects</a>
+      </li>
+      <a data-toggle="modal" href="#addproject" id="addprojectbutton">
+        <button class="btn btn-primary pull-right" type="button">+ New Project</button>
+      </a>
+    </ul>
+
     {{#if projectsLoaded}}
-      <span>Projects:</span>
       {{#each projects}}
         {{> project}}
       {{/each}}
     {{else}}
       <div class="row-fluid">
-        <div class="events-info-message">
-          <i class="icon-spinner icon-spin icon-2x pull-left"></i> Loading projects...
-        </div>
+        <i class="icon-spinner icon-spin icon-2x pull-left"></i> Loading projects...
       </div>
     {{/if}}
   </div>

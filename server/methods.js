@@ -4,12 +4,31 @@ Meteor.methods({
     if (!name)
       throw new Meteor.Error(404, "Must provide project name!");
     var date = (new Date()).getTime();
-    Projects.insert({name: name, description: description, date: date});
+    Projects.insert({
+      name: name,
+      description: description,
+      date: date
+    });
     return true;
   },
 
-  bar: function () {
-    // .. do other stuff ..
-    return "baz";
+  addVolunteer: function (id, name) {
+    if (!Volunteers.findOne({id: id}))
+    {
+      Volunteers.insert({
+        id: id,
+        name: name
+      })
+    }
+  },
+
+  addUser: function (id, name) {
+    if (!Users.findOne({id: id}))
+    {
+      Users.insert({
+        id: id,
+        name: name
+      })
+    }
   }
 });

@@ -23,6 +23,10 @@ var facebook = (function () {
     username = json.name;
     Session.set("id", userid);
     Session.set("userName", username);
+    if (Session.get("usersLoaded"))
+    {
+      Meteor.call('addUser', userid, username);
+    }
   };
 
   var fetchInfo = function () {

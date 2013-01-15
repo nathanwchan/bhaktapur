@@ -1,11 +1,7 @@
 (function () {
   // TEMPORARY FOR TESTING
   Meteor.startup(function () {
-    if (Volunteers.find().count() === 0) {
-      var volunteers = [{id: "100003196376938", name: "Nate Chan"}];
-      for (var i = 0; i < volunteers.length; i++)
-        Volunteers.insert(volunteers[i]);
-    }
+
   });
 
   // serve channel.html file, based on http://stackoverflow.com/a/13871399/145349

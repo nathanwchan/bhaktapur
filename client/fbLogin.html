@@ -2,10 +2,14 @@
   {{#if isLogged}}
 	<div class="btn-group">
 		<button class="btn primary">
-			<img src="https://graph.facebook.com/{{userId}}/picture?type=square" class="rounded3" height="18" width="18" /> {{userName}}
+			{{#if userName}}
+				<img src="https://graph.facebook.com/{{userId}}/picture?type=square" class="rounded3" height="18" width="18" /> {{userName}}
+			{{else}}
+				<i class="icon-spinner icon-spin icon-1x pull-left" style="margin: 5px 0 6px;"></i>
+		    {{/if}}
 		</button>
-	  	<button class="btn primary dropdown-toggle" data-toggle="dropdown" height="30">
-	  		<span class="caret" margin="5"></span>
+	  	<button class="btn primary dropdown-toggle" data-toggle="dropdown">
+	  		<span class="caret"></span>
 	  	</button>
 	  	<ul class="dropdown-menu pull-right">
 	  		<li><a id="logout-button">Logout</a></li>

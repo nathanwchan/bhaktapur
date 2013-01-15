@@ -22,7 +22,7 @@
     <style type="text/css">
       body {
         padding-top: 40px;
-        padding-bottom: 400px;
+        padding-bottom: 40px;
       }
       a[name] {
         padding-top: 40px;
@@ -85,9 +85,11 @@
     <div id="fb-root"></div>
   {{/constant}}
   <div class="container">
+    {{> projects}}
+    <hr>
     {{> volunteers}}
     <hr>
-    {{> projects}}
+    {{> users}}
   </div>
 
   {{> modals}}

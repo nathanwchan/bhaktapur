@@ -5,3 +5,7 @@ Meteor.publish("volunteers", function() {
 Meteor.publish("projects", function() {
     return Projects.find({});
 });
+
+Meteor.publish("users", function() {
+    return Users.find({});
+});
