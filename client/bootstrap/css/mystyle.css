@@ -23,3 +23,15 @@
 	font-size: 18px;
 	font-weight: 200;
 }
+
+.project {
+	padding: 20px;
+	margin-top: 20px;
+	background: #ddd;
+	cursor: pointer;
+	border-radius: 8px;
+	border-style: solid;
+	border-width: 1px;
+	position: relative;
+	overflow: hidden;
+}
