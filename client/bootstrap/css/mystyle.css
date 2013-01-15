@@ -3,3 +3,23 @@
 	text-align: center; 
     margin: 0px auto;*/
 }
+
+.outer_container {
+	margin-top: -20px;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	float: center;
+	width: 800px;
+	height: 100%;
+	background-color: rgba(220,220,220,0.5);
+}
+
+.inner_container {
+	padding: 20px 50px 40px;
+}
+
+.biggerfont {
+	font-size: 18px;
+	font-weight: 200;
+}

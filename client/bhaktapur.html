@@ -22,7 +22,11 @@
     <style type="text/css">
       body {
         padding-top: 40px;
-        padding-bottom: 40px;
+        background-image: url(../images/background.jpg);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
       }
       a[name] {
         padding-top: 40px;
@@ -46,10 +50,10 @@
               <a href="#">Home</a>
             </li>
             <li class="">
-              <a href="#volunteers">Past Volunteers</a>
+              <a href="#projects">Projects</a>
             </li>
             <li class="">
-              <a href="#projects">Past Projects</a>
+              <a href="#volunteers">Past Volunteers</a>
             </li>
           </ul>
         </div>
@@ -84,12 +88,14 @@
   {{#constant}}
     <div id="fb-root"></div>
   {{/constant}}
-  <div class="container">
-    {{> projects}}
-    <hr>
-    {{> volunteers}}
-    <hr>
-    {{> users}}
+  <div class="outer_container">
+    <div class="inner_container biggerfont center">
+      {{> projects}}
+      <hr>
+      {{> volunteers}}
+      <hr>
+      {{> users}}
+    </div>
   </div>
 
   {{> modals}}
