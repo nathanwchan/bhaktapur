@@ -1,17 +1,19 @@
 Meteor.methods({
-  addProject: function (name, description) {
+  addProject: function (name, description, user_id, user_name) {
     if (!name)
       throw new Meteor.Error(404, "Must provide project name!");
     var date = (new Date()).getTime();
     Projects.insert({
       name: name,
       description: description,
-      date: date
+      date: date,
+      last_modified_by_id: user_id,
+      last_modified_by_name: user_name
     });
     return true;
   },
 
-  editProject: function (id, name, description) {
+  editProject: function (id, name, description, user_id, user_name) {
     if (!name)
       throw new Meteor.Error(404, "Must provide project name!");
     var date = (new Date()).getTime();
@@ -20,7 +22,9 @@ Meteor.methods({
       {
         name: name,
         description: description,
-        date: date
+        date: date,
+        last_modified_by_id: user_id,
+        last_modified_by_name: user_name
       }
     );
     return true;

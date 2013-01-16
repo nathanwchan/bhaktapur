@@ -63,6 +63,8 @@ Template.addProjectModal.events = {
 		Meteor.call('addProject',
 			$('input#name').val(),
 			$('textarea#description').val(),
+			Session.get("id"),
+			Session.get("userName"),
 			function (error, result) {
 				if (!result) {
 					$('#name_error').prop("innerHTML", "Give the project a name!");
@@ -89,6 +91,8 @@ Template.editProjectModal.events = {
 			$('#projectId_edit').val(),
 			$('#name_edit').val(),
 			$('#description_edit').val(),
+			Session.get("id"),
+			Session.get("userName"),
 			function (error, result) {
 				if (!result) {
 					$('#name_error_edit').prop("innerHTML", "Give the project a name!");

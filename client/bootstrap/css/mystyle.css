@@ -4,7 +4,7 @@
     margin: 0px auto;*/
 }
 
-.outer_container {
+.outer-container {
 	margin-top: -20px;
 	margin-left: auto;
 	margin-right: auto;
@@ -15,7 +15,7 @@
 	background-color: rgba(220,220,220,0.5);
 }
 
-.inner_container {
+.inner-container {
 	padding: 20px 50px 40px;
 }
 
@@ -33,4 +33,9 @@
 	border-width: 1px;
 	position: relative;
 	overflow: hidden;
+}
+
+.last-modified-by {
+	font-size: 12px;
+	font-weight: 200;
 }
