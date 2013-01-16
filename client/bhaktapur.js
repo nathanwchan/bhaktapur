@@ -42,6 +42,7 @@ Template.users.usersLoaded = function () {
 
 Template.modals.events = {
 	'click input.add': function () {
+		$('#name_error').prop("innerHTML", "");
 		$('#submitButton').attr("disabled", true);
 		$('#submitSpinner').css("visibility", "visible")
 		Meteor.call('addProject',
@@ -55,6 +56,10 @@ Template.modals.events = {
 				}
 				else {
 					$('#addproject').modal('hide');
+					$('#submitButton').removeAttr("disabled");
+					$('#submitSpinner').css("visibility", "hidden");
+					$('input#name').attr("value", "");
+					$('textarea#description').attr("value", "");
 				}
 			});
 	}
