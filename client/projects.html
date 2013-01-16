@@ -27,7 +27,21 @@
 
 <template name="project">
   <div class="project">
-    <span class="title">{{name}}</span>
-    <span class="description">{{description}}</span>
+    <b class="title">{{name}}</b>
+    <div class="btn-group pull-right">
+      <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        {{#if isLogged}}
+          <li><a id="edit-project" data-toggle="modal" href="#editproject">Edit project</a></li>
+          <li><a id="mark-as-complete">Mark project as complete</a></li>
+        {{else}}
+          <li><a id="sign-in">Sign in with Facebook to contribute</a></li>
+        {{/if}}
+      </ul>
+    </div>
+    <p class="description">{{description}}</p>
+    <br>
   </div>
 </template>

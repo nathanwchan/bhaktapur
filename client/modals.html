@@ -1,5 +1,10 @@
 <template name="modals">
-  <div class="modal hide fade add-project-modal" id="addproject">
+  {{> addProjectModal}}
+  {{> editProjectModal}}
+</template>
+
+<template name="addProjectModal">
+  <div class="modal hide fade" id="addproject">
       <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">×</button>
           <h2>Add a new project!</h2>
@@ -11,7 +16,26 @@
       <div class="modal-footer">
           <i id="submitSpinner" class="icon-spinner icon-spin icon-2x pull-left" style="visibility: hidden;"></i>
           <a class="btn" data-dismiss="modal">Close</a>
-          <input id="submitButton" type="submit" class="btn btn-primary add" style="width: 75px;" value="Submit &raquo;">
+          <input id="submitButton" type="submit" class="btn btn-primary submit" style="width: 75px;" value="Submit &raquo;">
+      </div>
+  </div>
+</template>
+
+<template name="editProjectModal">
+  <div class="modal hide fade" id="editproject">
+      <input type="hidden" id="projectId_edit">
+      <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">×</button>
+          <h2>Edit project!</h2>
+      </div>
+      <div class="modal-body">
+           <p>Name: <input id="name_edit" type="text" placeholder="Bed Bug Project" autocomplete="off"><span id="name_error_edit" align="left" style="color: red; font-size: 16; margin-left: 10px;"></span></p>
+           <p>Description: <textarea id="description_edit" placeholder="Replace 10 bunk-beds in little boys' room..." rows="3"></textarea></p>
+      </div>
+      <div class="modal-footer">
+          <i id="submitSpinner_edit" class="icon-spinner icon-spin icon-2x pull-left" style="visibility: hidden;"></i>
+          <a class="btn" data-dismiss="modal">Close</a>
+          <input id="submitButton_edit" type="submit" class="btn btn-primary submit" style="width: 75px;" value="Save &raquo;">
       </div>
   </div>
 </template>
