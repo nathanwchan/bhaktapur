@@ -60,6 +60,14 @@ Template.project.comments = function () {
 	return Comments.find({project_id: this._id}, {limit: 3, sort: {date: -1}}).fetch().reverse();
 }
 
+Template.project.remainingComments = function () {
+	return Comments.find({project_id: this._id}, {skip: 3, sort: {date: -1}}).fetch().reverse();
+}
+
+Template.project.hasMoreComments = function () {
+	return Comments.find({project_id: this._id}).count() > 3;
+}
+
 Template.comment.date = function () {
 	return moment(this.date).fromNow();
 }
@@ -94,6 +102,15 @@ Template.project.events({
 				$('#project-' + self._id + '-comment-textbox').removeAttr("disabled");
 			});
     }
+  },
+  "click a.comments-toggle-link": function () {
+  	var self = this;
+  	if ($('#comments-toggle-link-project-' + self._id).attr("class").indexOf("collapsed") !== -1) {
+  		$('#comments-toggle-link-project-' + self._id).prop("innerHTML", "hide comments");
+  	}
+  	else {
+  		$('#comments-toggle-link-project-' + self._id).prop("innerHTML", "see all comments");
+  	}
   }
 });
 

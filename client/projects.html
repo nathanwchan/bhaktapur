@@ -43,6 +43,16 @@
     <p class="last-modified-by">last modified {{date}} by <a href="https://www.facebook.com/{{last_modified_by_id}}/" target="_blank">{{last_modified_by_name}}</a></p>
     <div class="comments">
       {{#if commentsLoaded}}
+        {{#if hasMoreComments}}
+          <div class="comments-toggle-link-div">
+            <a id="comments-toggle-link-project-{{projectId}}" class="comments-toggle-link accordion-toggle collapsed" data-toggle="collapse" href="#allcomments-project-{{projectId}}">see all comments</a>
+          </div>
+          <div id="allcomments-project-{{projectId}}" class="accordion-body collapse" style="height: 0px;">
+            {{#each remainingComments}}
+              {{> comment}}
+            {{/each}}
+          </div>
+        {{/if}}
         {{#each comments}}
           {{> comment}}
         {{/each}}
@@ -56,7 +66,9 @@
         <i id="submitSpinner-project-{{projectId}}-comment" class="icon-spinner icon-spin icon-2x" style="visibility: hidden;"></i>
       </div>
       {{else}}
-        <a id="sign-in-to-comment" class="sign-in-to-comment-link">Sign in with Facebook to comment</a>
+      <div class="sign-in-to-comment-div">
+        <a id="sign-in-to-comment">Sign in with Facebook to leave a comment</a>
+      </div>
       {{/if}}
     </div>
   </div>
