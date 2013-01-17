@@ -60,8 +60,16 @@ Template.project.comments = function () {
 	return Comments.find({project_id: this._id}, {limit: 3, sort: {date: -1}}).fetch().reverse();
 }
 
+var getRemainingComments = function (project_id) {
+	return Comments.find({project_id: project_id}, {skip: 3, sort: {date: -1}}).fetch().reverse();
+}
+
 Template.project.remainingComments = function () {
-	return Comments.find({project_id: this._id}, {skip: 3, sort: {date: -1}}).fetch().reverse();
+	return getRemainingComments(this._id);
+}
+
+Template.project.remainingCommentsCount = function () {
+	return getRemainingComments(this._id).length;
 }
 
 Template.project.hasMoreComments = function () {
@@ -109,7 +117,7 @@ Template.project.events({
   		$('#comments-toggle-link-project-' + self._id).prop("innerHTML", "hide comments");
   	}
   	else {
-  		$('#comments-toggle-link-project-' + self._id).prop("innerHTML", "see all comments");
+  		$('#comments-toggle-link-project-' + self._id).prop("innerHTML", "see " + getRemainingComments(self._id).length + " more comments");
   	}
   }
 });

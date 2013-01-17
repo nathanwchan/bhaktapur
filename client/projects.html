@@ -45,7 +45,7 @@
       {{#if commentsLoaded}}
         {{#if hasMoreComments}}
           <div class="comments-toggle-link-div">
-            <a id="comments-toggle-link-project-{{projectId}}" class="comments-toggle-link accordion-toggle collapsed" data-toggle="collapse" href="#allcomments-project-{{projectId}}">see all comments</a>
+            <a id="comments-toggle-link-project-{{projectId}}" class="comments-toggle-link accordion-toggle collapsed" data-toggle="collapse" href="#allcomments-project-{{projectId}}">see {{remainingCommentsCount}} more comments</a>
           </div>
           <div id="allcomments-project-{{projectId}}" class="accordion-body collapse" style="height: 0px;">
             {{#each remainingComments}}
