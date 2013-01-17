@@ -37,12 +37,40 @@
           <li><a id="edit-project" data-toggle="modal" href="#editproject">Edit project</a></li>
           <li><a id="mark-as-complete">Mark project as complete</a></li>
         {{else}}
-          <li><a id="sign-in">Sign in with Facebook to contribute</a></li>
+          <li><a id="sign-in-to-edit">Sign in with Facebook to contribute</a></li>
         {{/if}}
       </ul>
     </div>
     <p class="description">{{description}}</p>
-    <br>
-    <p class="last-modified-by">last modified by <a href="https://www.facebook.com/{{last_modified_by_id}}/" target="_blank">{{last_modified_by_name}}</a></p>
+    <p class="last-modified-by">last modified {{date}} by <a href="https://www.facebook.com/{{last_modified_by_id}}/" target="_blank">{{last_modified_by_name}}</a></p>
+    <div class="comments">
+      {{#if commentsLoaded}}
+        {{#each comments}}
+          {{> comment}}
+        {{/each}}
+      {{else}}
+        <div class="row-fluid">
+          <i class="icon-spinner icon-spin icon-2x pull-left"></i> Loading comments...
+        </div>
+      {{/if}}
+      {{#if isLogged}}
+      <div>
+        <img src="https://graph.facebook.com/{{userId}}/picture?type=square" class="comment-user-pic" height="30" width="30" />
+        <input id="project-{{projectId}}-comment-textbox" class="comment-textbox input-xxlarge" type="text" placeholder="Write a comment..." autocomplete="off">
+      </div>
+      {{else}}
+        <a id="sign-in-to-comment" class="sign-in-to-comment-link">Sign in with Facebook to comment</a>
+      {{/if}}
+    </div>
+  </div>
+</template>
+
+<template name="comment">
+  <div class="comment">
+    <a class="comment-user-pic" href="https://www.facebook.com/{{user_id}}/" target="_blank"><img src="https://graph.facebook.com/{{user_id}}/picture?type=square" height="30" width="30"></a>
+    <div class="comment-text">
+      <a href="https://www.facebook.com/{{user_id}}/" class="comment-user-name" target="_blank">{{user_name}}</a> {{comment}}
+      <p class="comment-date">{{date}}</p>
+    </div>
   </div>
 </template>

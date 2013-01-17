@@ -48,5 +48,18 @@ Meteor.methods({
         name: name
       })
     }
+  },
+
+  addComment: function (project_id, user_id, user_name, comment) {
+    if (!comment)
+      throw new Meteor.Error(404, "Comment can't be blank!");
+    var date = (new Date()).getTime();
+    Comments.insert({
+      project_id: project_id,
+      user_id: user_id,
+      user_name: user_name,
+      comment: comment,
+      date: date
+    })
   }
 });

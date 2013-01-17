@@ -16,6 +16,10 @@ Meteor.subscribe("volunteers", function(){
 	Session.set('volunteersLoaded', true);
 });
 
+Meteor.subscribe("comments", function(){
+	Session.set('commentsLoaded', true);
+});
+
 Template.volunteers.volunteers = function () {
 	return Volunteers.find({}, {sort: {name: -1}});
 };
@@ -36,14 +40,52 @@ Template.project.isLogged = function () {
   	return (Session.get("accessToken") || null) !== null;
 };
 
+Template.project.userId = function () {
+	return Session.get("id");
+};
+
+Template.project.projectId = function () {
+	return this._id;
+};
+
+Template.project.date = function () {
+	return moment(this.date).fromNow();
+}
+
+Template.project.commentsLoaded = function () {
+	return Session.get('commentsLoaded');
+}
+
+Template.project.comments = function () {
+	return Comments.find({project_id: this._id}, {sort: {date: 1}});
+}
+
+Template.comment.date = function () {
+	return moment(this.date).fromNow();
+}
+
 Template.project.events({
-  "click #sign-in": function () {
+  "click #sign-in-to-edit": function () {
+    showLoginPopup();
+  },
+  "click #sign-in-to-comment": function () {
     showLoginPopup();
   },
   "click #edit-project": function () {
   	$('#projectId_edit').attr("value", this._id)
   	$('#name_edit').attr("value", this.name);
 	$('#description_edit').attr("value", this.description);
+  },
+  "keypress input.comment-textbox": function (evt) {
+    if (evt.which === 13) {
+      Meteor.call('addComment',
+      	this._id,
+		Session.get("id"),
+		Session.get("userName"),
+      	$('#project-' + this._id + '-comment-textbox').val()
+      	);
+      $('#project-' + this._id + '-comment-textbox').attr("value", "");
+    }
   }
 });
 
@@ -61,8 +103,8 @@ Template.addProjectModal.events = {
 		$('#submitButton').attr("disabled", true);
 		$('#submitSpinner').css("visibility", "visible")
 		Meteor.call('addProject',
-			$('input#name').val(),
-			$('textarea#description').val(),
+			$('#name').val(),
+			$('#description').val(),
 			Session.get("id"),
 			Session.get("userName"),
 			function (error, result) {
@@ -75,8 +117,8 @@ Template.addProjectModal.events = {
 					$('#addproject').modal('hide');
 					$('#submitButton').removeAttr("disabled");
 					$('#submitSpinner').css("visibility", "hidden");
-					$('input#name').attr("value", "");
-					$('textarea#description').attr("value", "");
+					$('#name').attr("value", "");
+					$('#description').attr("value", "");
 				}
 			});
 	}
