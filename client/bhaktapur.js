@@ -57,7 +57,7 @@ Template.project.commentsLoaded = function () {
 }
 
 Template.project.comments = function () {
-	return Comments.find({project_id: this._id}, {sort: {date: 1}});
+	return Comments.find({project_id: this._id}, {limit: 3, sort: {date: -1}}).fetch().reverse();
 }
 
 Template.comment.date = function () {
