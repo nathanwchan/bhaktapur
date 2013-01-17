@@ -57,11 +57,11 @@ Template.project.commentsLoaded = function () {
 }
 
 Template.project.comments = function () {
-	return Comments.find({project_id: this._id}, {limit: 3, sort: {date: -1}}).fetch().reverse();
+	return Comments.find({project_id: this._id}, {limit: defaultShownCommentsCount, sort: {date: -1}}).fetch().reverse();
 }
 
 var getRemainingComments = function (project_id) {
-	return Comments.find({project_id: project_id}, {skip: 3, sort: {date: -1}}).fetch().reverse();
+	return Comments.find({project_id: project_id}, {skip: defaultShownCommentsCount, sort: {date: -1}}).fetch().reverse();
 }
 
 Template.project.remainingComments = function () {
@@ -73,7 +73,7 @@ Template.project.remainingCommentsCount = function () {
 }
 
 Template.project.hasMoreComments = function () {
-	return Comments.find({project_id: this._id}).count() > 3;
+	return Comments.find({project_id: this._id}).count() > defaultShownCommentsCount;
 }
 
 Template.comment.date = function () {
