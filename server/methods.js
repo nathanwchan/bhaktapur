@@ -38,6 +38,7 @@ Meteor.methods({
         name: name
       })
     }
+    return true;
   },
 
   addUser: function (id, name) {
@@ -48,6 +49,7 @@ Meteor.methods({
         name: name
       })
     }
+    return true;
   },
 
   addComment: function (project_id, user_id, user_name, comment) {
@@ -60,6 +62,7 @@ Meteor.methods({
       user_name: user_name,
       comment: comment,
       date: date
-    })
+    });
+    return true;
   }
 });

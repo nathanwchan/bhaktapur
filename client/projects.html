@@ -18,9 +18,7 @@
         {{> project}}
       {{/each}}
     {{else}}
-      <div class="row-fluid">
-        <i class="icon-spinner icon-spin icon-2x pull-left"></i> Loading projects...
-      </div>
+      <i class="icon-spinner icon-spin icon-2x pull-left"></i> Loading projects...
     {{/if}}
   </div>
 </template>
@@ -49,14 +47,13 @@
           {{> comment}}
         {{/each}}
       {{else}}
-        <div class="row-fluid">
-          <i class="icon-spinner icon-spin icon-2x pull-left"></i> Loading comments...
-        </div>
+        <i class="icon-spinner icon-spin icon-2x pull-left"></i> Loading comments...
       {{/if}}
       {{#if isLogged}}
       <div>
         <img src="https://graph.facebook.com/{{userId}}/picture?type=square" class="comment-user-pic" height="30" width="30" />
         <input id="project-{{projectId}}-comment-textbox" class="comment-textbox input-xxlarge" type="text" placeholder="Write a comment..." autocomplete="off">
+        <i id="submitSpinner-project-{{projectId}}-comment" class="icon-spinner icon-spin icon-2x" style="visibility: hidden;"></i>
       </div>
       {{else}}
         <a id="sign-in-to-comment" class="sign-in-to-comment-link">Sign in with Facebook to comment</a>

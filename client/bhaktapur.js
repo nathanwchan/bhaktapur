@@ -77,14 +77,22 @@ Template.project.events({
 	$('#description_edit').attr("value", this.description);
   },
   "keypress input.comment-textbox": function (evt) {
-    if (evt.which === 13) {
-      Meteor.call('addComment',
-      	this._id,
-		Session.get("id"),
-		Session.get("userName"),
-      	$('#project-' + this._id + '-comment-textbox').val()
-      	);
-      $('#project-' + this._id + '-comment-textbox').attr("value", "");
+  	var self = this;
+    if (evt.which === 13
+    	&& $('#project-' + self._id + '-comment-textbox').val() !== ""
+    	&& $('#project-' + self._id + '-comment-textbox').attr('disabled') !== "disabled") {
+    	$('#submitSpinner-project-' + self._id + '-comment').css("visibility", "visible");
+		$('#project-' + self._id + '-comment-textbox').attr("disabled", true);
+		Meteor.call('addComment',
+			self._id,
+			Session.get("id"),
+			Session.get("userName"),
+			$('#project-' + self._id + '-comment-textbox').val(),
+			function (error, result) {
+				$('#submitSpinner-project-' + self._id + '-comment').css("visibility", "hidden");
+  				$('#project-' + self._id + '-comment-textbox').attr("value", "");
+				$('#project-' + self._id + '-comment-textbox').removeAttr("disabled");
+			});
     }
   }
 });
