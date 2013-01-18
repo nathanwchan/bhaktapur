@@ -96,6 +96,14 @@ Template.comment.date = function () {
 	return moment(this.date).fromNow();
 }
 
+Template.projects.events({
+  "click #add-project-button": function () {
+	Session.set("photosToUpload", false);
+	Session.set("photosToUploadJson", null);
+	$('#photosToUploadDiv').empty();
+  }
+});
+
 Template.project.events({
   "click #sign-in-to-edit": function () {
     showLoginPopup();
@@ -109,7 +117,7 @@ Template.project.events({
 	$('#description_edit').attr("value", this.description);
 	Session.set("photosToUpload", false);
 	Session.set("photosToUploadJson", null);
-	$('#photosToUploadDiv').empty();
+	$('#photosToUploadDiv_edit').empty();
   },
   "keypress input.comment-textbox": function (evt) {
   	var self = this;
@@ -159,8 +167,8 @@ Template.addProjectModal.events = {
 			$('#description').val(),
 			Session.get("id"),
 			Session.get("userName"),
-			function (error, result) {
-				if (!result) {
+			function (error, new_project_id) {
+				if (!new_project_id) {
 					$('#name_error').prop("innerHTML", "Give the project a name!");
 					$('#submitButton').removeAttr("disabled");
 					$('#submitSpinner').css("visibility", "hidden")
@@ -171,8 +179,34 @@ Template.addProjectModal.events = {
 					$('#submitSpinner').css("visibility", "hidden");
 					$('#name').attr("value", "");
 					$('#description').attr("value", "");
+					if (Session.get("photosToUpload")) {
+						fpfiles = JSON.parse(Session.get("photosToUploadJson"));
+						return _.each(fpfiles, function(image) {
+							Meteor.call('addPhoto',
+								new_project_id,
+								Session.get("id"),
+								Session.get("userName"),
+								image.filename,
+								image.url
+							);
+						});
+					}
 				}
 			});
+	},
+	'click #uploadPhotosButton': function() {
+		return filepicker.pickAndStore({multiple: true},{},function(fpfiles){
+			Session.set("photosToUpload", true);
+			if (!Session.get("photosToUploadJson")) {
+				Session.set("photosToUploadJson", JSON.stringify(fpfiles));
+			}
+			else {
+				Session.set("photosToUploadJson", JSON.stringify(JSON.parse(Session.get("photosToUploadJson")).concat(JSON.parse(JSON.stringify(fpfiles)))));
+			}
+			return _.each(fpfiles, function(image) {
+				$('#photosToUploadDiv').append('<img src="' + image.url + '" height="100" width="100" />');
+			});
+		});
 	}
 };
 
@@ -224,7 +258,7 @@ Template.editProjectModal.events = {
 				Session.set("photosToUploadJson", JSON.stringify(JSON.parse(Session.get("photosToUploadJson")).concat(JSON.parse(JSON.stringify(fpfiles)))));
 			}
 			return _.each(fpfiles, function(image) {
-				$('#photosToUploadDiv').append('<img src="' + image.url + '" height="100" width="100" />');
+				$('#photosToUploadDiv_edit').append('<img src="' + image.url + '" height="100" width="100" />');
 			});
 		});
 	}
