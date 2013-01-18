@@ -109,6 +109,7 @@ Template.project.events({
 	$('#description_edit').attr("value", this.description);
 	Session.set("photosToUpload", false);
 	Session.set("photosToUploadJson", null);
+	$('#photosToUploadDiv').empty();
   },
   "keypress input.comment-textbox": function (evt) {
   	var self = this;
@@ -223,7 +224,7 @@ Template.editProjectModal.events = {
 				Session.set("photosToUploadJson", JSON.stringify(JSON.parse(Session.get("photosToUploadJson")).concat(JSON.parse(JSON.stringify(fpfiles)))));
 			}
 			return _.each(fpfiles, function(image) {
-				$('#photosToUploadDiv').append('<img src="' + image.url + '" height="100" width="100" />')
+				$('#photosToUploadDiv').append('<img src="' + image.url + '" height="100" width="100" />');
 			});
 		});
 	}
