@@ -9,7 +9,7 @@
         <a href="#projects">Completed Projects</a>
       </li>
       <a data-toggle="modal" href="#addproject">
-        <button id="add-project-button" class="btn btn-primary pull-right" type="button">+ New Project</button>
+        <button id="add-project-button" class="btn btn-primary pull-right" type="button"><i class="icon-plus"/> New Project</button>
       </a>
     </ul>
     {{#if projectsLoaded}}
@@ -24,7 +24,6 @@
 
 <template name="project">
   <div class="project">
-    <p class="title">{{name}}</p>
     <div class="btn-group pull-right">
       <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
         <span class="caret"></span>
@@ -38,6 +37,7 @@
         {{/if}}
       </ul>
     </div>
+    <p class="title">{{name}}</p>
     <p class="description">{{description}}</p>
     <p class="last-modified-by">last modified {{date}} by <a href="https://www.facebook.com/{{last_modified_by_id}}/" target="_blank">{{last_modified_by_name}}</a></p>
 

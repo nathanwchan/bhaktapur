@@ -1,9 +1,3 @@
-.carousel {
-/*	margin-bottom: 0px; 
-	text-align: center; 
-    margin: 0px auto;*/
-}
-
 .outer-container {
 	margin-top: -20px;
 	margin-left: auto;
@@ -20,11 +14,6 @@
 	font-size: 18px;
 }
 
-.title {
-	font-size: 24px;
-	font-weight: bold;
-}
-
 .project {
 	padding: 20px;
 	width: 728px;
@@ -35,6 +24,15 @@
 	border-width: 1px;
 	position: relative;
 	overflow: hidden;
+}
+
+.title {
+	font-size: 24px;
+	font-weight: bold;
+}
+
+.description {
+	white-space: pre-wrap;
 }
 
 .photos {
@@ -103,4 +101,36 @@
 .comments-toggle-link-div {
 	padding: 0px 5px 10px;
 	margin-top: -5px;
+}
+
+.modal-left {
+	padding: 5px;
+	font-size: 16px;
+	float: left;
+	text-align: right;
+	width: 85px;
+}
+
+.modal-right {
+	float: right;
+	width: 400px;
+}
+
+.modal-title-textbox {
+}
+
+.modal-description-textarea {
+	width: 400px;
+	height: 100px;
+}
+
+.modal-description-textarea-edit {
+	width: 400px;
+	height: 150px;
+}
+
+.modal-error-message {
+	color: red;
+	font-size: 16;
+	margin-left: 10px;
 }

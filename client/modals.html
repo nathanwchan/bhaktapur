@@ -10,10 +10,29 @@
           <h2>Add a new project!</h2>
       </div>
       <div class="modal-body">
-           <p>Name: <input id="name" type="text" placeholder="Bed Bug Project" autocomplete="off"><span id="name_error" align="left" style="color: red; font-size: 16; margin-left: 10px;"></span></p>
-           <p>Description: <textarea id="description" placeholder="Replace 10 bunk-beds in little boys' room..." rows="3"></textarea></p>
-           <div id="photosToUploadDiv"></div>
-           <button id="uploadPhotosButton" type="button" class="btn">Upload photos</button>
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                <div class="modal-left">Name:</div>
+                <div class="modal-right">
+                  <input id="name" class="modal-title" type="text" placeholder="Bed Bug Project" autocomplete="off">
+                  <span id="name_error" class="modal-error-message"></span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="modal-left">Description:</div>
+                <div class="modal-right">
+                  <textarea id="description" class="modal-description-textarea" placeholder="Replace bunk-beds in the little boys' room..."></textarea>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div id="photosToUploadDiv"></div>
+        <button id="uploadPhotosButton" type="button" class="btn btn-info">Upload photos</button>
       </div>
       <div class="modal-footer">
           <i id="submitSpinner" class="icon-spinner icon-spin icon-2x pull-left" style="visibility: hidden;"></i>
@@ -31,10 +50,29 @@
           <h2>Edit project!</h2>
       </div>
       <div class="modal-body">
-           <p>Name: <input id="name_edit" type="text" placeholder="Bed Bug Project" autocomplete="off"><span id="name_error_edit" align="left" style="color: red; font-size: 16; margin-left: 10px;"></span></p>
-           <p>Description: <textarea id="description_edit" placeholder="Replace 10 bunk-beds in little boys' room..." rows="3"></textarea></p>
-           <div id="photosToUploadDiv_edit"></div>
-           <button id="uploadPhotosButton_edit" type="button" class="btn">Upload new photos</button>
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                <div class="modal-left">Name:</div>
+                <div class="modal-right">
+                  <input id="name_edit" class="modal-title" type="text" placeholder="Bed Bug Project" autocomplete="off">
+                  <span id="name_error_edit" class="modal-error-message"></span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="modal-left">Description:</div>
+                <div class="modal-right">
+                  <textarea id="description_edit" class="modal-description-textarea-edit" placeholder="Replace bunk-beds in the little boys' room..."></textarea>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div id="photosToUploadDiv_edit"></div>
+        <button id="uploadPhotosButton_edit" type="button" class="btn btn-info">Upload new photos</button>
       </div>
       <div class="modal-footer">
           <i id="submitSpinner_edit" class="icon-spinner icon-spin icon-2x pull-left" style="visibility: hidden;"></i>
