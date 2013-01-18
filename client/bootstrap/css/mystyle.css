@@ -17,11 +17,12 @@
 
 .inner-container {
 	padding: 20px 40px 40px;
+	font-size: 18px;
 }
 
-.biggerfont {
-	font-size: 18px;
-	font-weight: 200;
+.title {
+	font-size: 24px;
+	font-weight: bold;
 }
 
 .project {
@@ -42,14 +43,14 @@
 
 .photo {
 	float: left;
-	margin: 0px 5px 10px;
+	margin-right: 5px;
+	margin-bottom: 10px;
 	max-height: 150px;
 	width: auto;
 }
 
 .see-all-photos-link {
 	font-size: 12px;
-	line-height: 140px;
 }
 
 .comments {

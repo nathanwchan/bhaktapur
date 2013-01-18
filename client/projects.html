@@ -24,7 +24,7 @@
 
 <template name="project">
   <div class="project">
-    <b class="title">{{name}}</b>
+    <p class="title">{{name}}</p>
     <div class="btn-group pull-right">
       <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
         <span class="caret"></span>
@@ -48,6 +48,7 @@
         {{/each}}
         {{#if morePhotos}}
           <div class="see-all-photos-link">
+            <br><br><br>
             <a>show all photos</a>
           </div>
         {{/if}}
