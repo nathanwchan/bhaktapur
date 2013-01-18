@@ -31,6 +31,8 @@
       <div class="modal-body">
            <p>Name: <input id="name_edit" type="text" placeholder="Bed Bug Project" autocomplete="off"><span id="name_error_edit" align="left" style="color: red; font-size: 16; margin-left: 10px;"></span></p>
            <p>Description: <textarea id="description_edit" placeholder="Replace 10 bunk-beds in little boys' room..." rows="3"></textarea></p>
+           <div id="photosToUploadDiv"></div>
+           <button id="uploadPhotosButton_edit" type="button" class="btn">Upload new photos</button>
       </div>
       <div class="modal-footer">
           <i id="submitSpinner_edit" class="icon-spinner icon-spin icon-2x pull-left" style="visibility: hidden;"></i>
@@ -38,4 +40,8 @@
           <input id="submitButton_edit" type="submit" class="btn btn-primary submit" style="width: 75px;" value="Save &raquo;">
       </div>
   </div>
+</template>
+
+<template name="photoToUpload">
+  <img src="{{url}}" height="40" width="40"></img>
 </template>

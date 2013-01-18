@@ -1,9 +1,4 @@
 (function () {
-  // TEMPORARY FOR TESTING
-  Meteor.startup(function () {
-
-  });
-
   // serve channel.html file, based on http://stackoverflow.com/a/13871399/145349
   var connect = __meteor_bootstrap__.require("connect");
 

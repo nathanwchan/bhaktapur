@@ -12,7 +12,6 @@
         <button class="btn btn-primary pull-right" type="button">+ New Project</button>
       </a>
     </ul>
-
     {{#if projectsLoaded}}
       {{#each projects}}
         {{> project}}
@@ -40,6 +39,16 @@
       </ul>
     </div>
     <p class="description">{{description}}</p>
+    <div class="photos">
+      {{#if photosLoaded}}
+        {{#each photos}}
+          {{> photo}}
+        {{/each}}
+      {{else}}
+        <i class="icon-spinner icon-spin icon-2x pull-left"></i> Loading photos...
+      {{/if}}
+    </div>
+    <br>
     <p class="last-modified-by">last modified {{date}} by <a href="https://www.facebook.com/{{last_modified_by_id}}/" target="_blank">{{last_modified_by_name}}</a></p>
     <div class="comments">
       {{#if commentsLoaded}}
@@ -71,6 +80,12 @@
       </div>
       {{/if}}
     </div>
+  </div>
+</template>
+
+<template name="photo">
+  <div class="photo">
+    <img src="{{photo_url}}" height="100" width="100" />
   </div>
 </template>
 

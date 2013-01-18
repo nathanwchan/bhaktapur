@@ -1,3 +1,7 @@
+Meteor.startup(function () {
+	filepicker.setKey('AGtZv8CFvQABLy5q9bn2Lz');
+});
+
 Meteor.subscribe("users", function(){
 	Session.set('usersLoaded', true);
 	userid = Session.get("id");
@@ -18,6 +22,10 @@ Meteor.subscribe("volunteers", function(){
 
 Meteor.subscribe("comments", function(){
 	Session.set('commentsLoaded', true);
+});
+
+Meteor.subscribe("photos", function(){
+	Session.set('photosLoaded', true);
 });
 
 Template.volunteers.volunteers = function () {
@@ -47,6 +55,14 @@ Template.project.userId = function () {
 Template.project.projectId = function () {
 	return this._id;
 };
+
+Template.project.photosLoaded = function () {
+	return Session.get('photosLoaded');
+};
+
+Template.project.photos = function () {
+	return Photos.find({project_id: this._id}, {limit: 5, sort: {date: -1}}).fetch().reverse();
+}
 
 Template.project.date = function () {
 	return moment(this.date).fromNow();
@@ -91,6 +107,8 @@ Template.project.events({
   	$('#projectId_edit').attr("value", this._id)
   	$('#name_edit').attr("value", this.name);
 	$('#description_edit').attr("value", this.description);
+	Session.set("photosToUpload", false);
+	Session.set("photosToUploadJson", null);
   },
   "keypress input.comment-textbox": function (evt) {
   	var self = this;
@@ -182,5 +200,43 @@ Template.editProjectModal.events = {
 					$('#description_edit').attr("value", "");
 				}
 			});
+		if (Session.get("photosToUpload")) {
+			fpfiles = JSON.parse(Session.get("photosToUploadJson"));
+			return _.each(fpfiles, function(image) {
+				Meteor.call('addPhoto',
+					$('#projectId_edit').val(),
+					Session.get("id"),
+					Session.get("userName"),
+					image.filename,
+					image.url
+				);
+			});
+		}
+	},
+	'click #uploadPhotosButton_edit': function() {
+		return filepicker.pickAndStore({multiple: true},{},function(fpfiles){
+			Session.set("photosToUpload", true);
+			if (!Session.get("photosToUploadJson")) {
+				Session.set("photosToUploadJson", JSON.stringify(fpfiles));
+			}
+			else {
+				Session.set("photosToUploadJson", JSON.stringify(JSON.parse(Session.get("photosToUploadJson")).concat(JSON.parse(JSON.stringify(fpfiles)))));
+			}
+			return _.each(fpfiles, function(image) {
+				$('#photosToUploadDiv').append('<img src="' + image.url + '" height="100" width="100" />')
+			});
+		});
 	}
 };
+
+Template.editProjectModal.photosToUpload = function () {
+	var photosToUploadString = Session.get("photosToUploadJson");
+	if (!photosToUploadString) {
+		return photosToUploadString;
+	}
+	return JSON.parse(photosToUploadString);
+};
+
+Template.editProjectModal.nathan = function () {
+	return Session.get("photosToUploadJson");
+}

@@ -64,5 +64,18 @@ Meteor.methods({
       date: date
     });
     return true;
+  },
+
+  addPhoto: function (project_id, user_id, user_name, photo_name, photo_url) {
+    var date = (new Date()).getTime();
+    Photos.insert({
+      project_id: project_id,
+      user_id: user_id,
+      user_name: user_name,
+      photo_name: photo_name,
+      photo_url: photo_url,
+      date: date
+    });
+    return true;
   }
 });

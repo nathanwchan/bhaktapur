@@ -13,3 +13,7 @@ Meteor.publish("users", function() {
 Meteor.publish("comments", function() {
     return Comments.find({});
 });
+
+Meteor.publish("photos", function() {
+    return Photos.find({});
+});
