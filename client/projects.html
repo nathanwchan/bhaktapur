@@ -39,17 +39,22 @@
       </ul>
     </div>
     <p class="description">{{description}}</p>
+    <p class="last-modified-by">last modified {{date}} by <a href="https://www.facebook.com/{{last_modified_by_id}}/" target="_blank">{{last_modified_by_name}}</a></p>
+
     <div class="photos">
       {{#if photosLoaded}}
-        {{#each photos}}
+        {{#each latestPhotos}}
           {{> photo}}
         {{/each}}
+        {{#if morePhotos}}
+          <div class="see-all-photos-link">
+            <a>show all photos</a>
+          </div>
+        {{/if}}
       {{else}}
         <i class="icon-spinner icon-spin icon-2x pull-left"></i> Loading photos...
       {{/if}}
     </div>
-    <br>
-    <p class="last-modified-by">last modified {{date}} by <a href="https://www.facebook.com/{{last_modified_by_id}}/" target="_blank">{{last_modified_by_name}}</a></p>
     <div class="comments">
       {{#if commentsLoaded}}
         {{#if hasMoreComments}}
@@ -71,7 +76,7 @@
       {{#if isLogged}}
       <div>
         <img src="https://graph.facebook.com/{{userId}}/picture?type=square" class="comment-user-pic" height="30" width="30" />
-        <input id="project-{{projectId}}-comment-textbox" class="comment-textbox input-xxlarge" type="text" placeholder="Write a comment..." autocomplete="off">
+        <input id="project-{{projectId}}-comment-textbox" class="comment-textbox" type="text" placeholder="Write a comment..." autocomplete="off">
         <i id="submitSpinner-project-{{projectId}}-comment" class="icon-spinner icon-spin icon-2x" style="visibility: hidden;"></i>
       </div>
       {{else}}
@@ -84,9 +89,7 @@
 </template>
 
 <template name="photo">
-  <div class="photo">
-    <img src="{{photo_url}}" height="100" width="100" />
-  </div>
+  <img src="{{photo_url}}" class="photo" />
 </template>
 
 <template name="comment">

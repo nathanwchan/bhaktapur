@@ -10,13 +10,13 @@
 	margin-right: auto;
 	display: block;
 	float: center;
-	width: 800px;
+	width: 850px;
 	height: 100%;
 	background-color: rgba(220,220,220,0.5);
 }
 
 .inner-container {
-	padding: 20px 50px 40px;
+	padding: 20px 40px 40px;
 }
 
 .biggerfont {
@@ -26,6 +26,7 @@
 
 .project {
 	padding: 20px;
+	width: 728px;
 	margin-top: 20px;
 	background: #ddd;
 	border-radius: 8px;
@@ -36,16 +37,25 @@
 }
 
 .photos {
-	margin: 5px;
+	width: 100%;
 }
 
 .photo {
 	float: left;
+	margin: 0px 5px 10px;
+	max-height: 150px;
+	width: auto;
+}
+
+.see-all-photos-link {
+	font-size: 12px;
+	line-height: 140px;
 }
 
 .comments {
 	padding: 10px 5px 0px;;
 	margin-top: 20px;
+	width: 716px;
 	background: #eee;
 	border-radius: 8px;
 	border-style: solid;
@@ -82,6 +92,7 @@
 .comment-textbox {
 	margin-top: -8px;
 	margin-left: -1px;
+	width: 620px;
 }
 
 .comments-toggle-link {

@@ -60,8 +60,17 @@ Template.project.photosLoaded = function () {
 	return Session.get('photosLoaded');
 };
 
-Template.project.photos = function () {
-	return Photos.find({project_id: this._id}, {limit: 5, sort: {date: -1}}).fetch().reverse();
+var getAllPhotos = function (project_id) {
+	// return Photos.find({project_id: project_id}, {limit: defaultShownPhotosCount, sort: {date: -1}}).fetch().reverse();
+	return Photos.find({project_id: project_id}, {sort: {date: -1}}).fetch();
+}
+
+Template.project.latestPhotos = function () {
+	return getAllPhotos(this._id).slice(0, defaultShownPhotosCount).reverse();
+}
+
+Template.project.morePhotos = function () {
+	return (getAllPhotos(this._id).length > defaultShownPhotosCount);
 }
 
 Template.project.date = function () {
