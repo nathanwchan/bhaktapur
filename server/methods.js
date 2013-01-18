@@ -40,12 +40,13 @@ Meteor.methods({
     return true;
   },
 
-  addUser: function (id, name) {
+  addUser: function (id, name, email) {
     if (!Users.findOne({id: id}))
     {
       Users.insert({
         id: id,
-        name: name
+        name: name,
+        email: email
       })
     }
     return true;

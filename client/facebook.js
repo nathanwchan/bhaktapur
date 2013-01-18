@@ -21,18 +21,20 @@ var facebook = (function () {
   var setUserInfo = function (json) {
     userid = json.id;
     username = json.name;
+    useremail = json.email;
     Session.set("id", userid);
     Session.set("userName", username);
+    Session.set("userEmail", useremail);
     if (Session.get("usersLoaded"))
     {
-      Meteor.call('addUser', userid, username);
+      Meteor.call('addUser', userid, username, useremail);
     }
   };
 
   var fetchInfo = function () {
     var accessToken = getAccessToken();
     if (accessToken !== null) {
-      var url = "https://graph.facebook.com/me?fields=id,name";
+      var url = "https://graph.facebook.com/me?fields=id,name,email";
       url += "&access_token=" + accessToken;
       Meteor.http.get(url, {timeout: 30000}, processInfo);
     }

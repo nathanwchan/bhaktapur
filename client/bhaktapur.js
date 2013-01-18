@@ -5,10 +5,11 @@ Meteor.startup(function () {
 Meteor.subscribe("users", function(){
 	Session.set('usersLoaded', true);
 	userid = Session.get("id");
-	username = Session.get("userName")
-	if (!!userid && !!username)
+	username = Session.get("userName");
+	useremail = Session.get("userEmail");
+	if (!!userid)
 	{
-		Meteor.call('addUser', userid, username);
+		Meteor.call('addUser', userid, username, useremail);
 	}
 });
 
@@ -61,7 +62,6 @@ Template.project.photosLoaded = function () {
 };
 
 var getAllPhotos = function (project_id) {
-	// return Photos.find({project_id: project_id}, {limit: defaultShownPhotosCount, sort: {date: -1}}).fetch().reverse();
 	return Photos.find({project_id: project_id}, {sort: {date: -1}}).fetch();
 }
 
