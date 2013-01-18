@@ -3,7 +3,9 @@
 	<div class="btn-group">
 		<button class="btn primary">
 			{{#if userName}}
-				<img src="https://graph.facebook.com/{{userId}}/picture?type=square" class="rounded3" height="18" width="18" /> {{userName}}
+				<div class="navbar-username">
+					<img src="https://graph.facebook.com/{{userId}}/picture?type=square" class="navbar-userpic" height="18" width="18" /> {{userName}}
+				</div>
 			{{else}}
 				<i class="icon-spinner icon-spin icon-1x pull-left" style="margin: 5px 0 6px;"></i>
 		    {{/if}}
