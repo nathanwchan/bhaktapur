@@ -66,11 +66,19 @@ var getAllPhotos = function (project_id) {
 }
 
 Template.project.latestPhotos = function () {
-	return getAllPhotos(this._id).slice(0, defaultShownPhotosCount).reverse();
+	return getAllPhotos(this._id).slice(0, defaultShownPhotosCount);
 }
 
 Template.project.morePhotos = function () {
 	return (getAllPhotos(this._id).length > defaultShownPhotosCount);
+}
+
+Template.project.firstOfRemainingPhotos = function () {
+	return getAllPhotos(this._id)[defaultShownPhotosCount].photo_url;
+}
+
+Template.project.remainingPhotos = function () {
+	return getAllPhotos(this._id).slice(defaultShownPhotosCount + 1);
 }
 
 Template.project.date = function () {
@@ -99,6 +107,10 @@ Template.project.remainingCommentsCount = function () {
 
 Template.project.hasMoreComments = function () {
 	return Comments.find({project_id: this._id}).count() > defaultShownCommentsCount;
+}
+
+Template.photo.projectId = function () {
+	return this.project_id;
 }
 
 Template.comment.date = function () {

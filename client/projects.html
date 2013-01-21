@@ -49,7 +49,15 @@
         {{#if morePhotos}}
           <div class="see-all-photos-link">
             <br><br><br>
-            <a>show all photos</a>
+            <a class="fancybox" rel="gallery_project_{{projectId}}" href="{{firstOfRemainingPhotos}}/convert?quality=30">
+              show all photos
+              <img style="display: none" src="{{firstOfRemainingPhotos}}/convert?quality=10" class="photo" />
+            </a>
+          </div>
+          <div style="display: none">
+            {{#each remainingPhotos}}
+              {{> photo}}
+            {{/each}}
           </div>
         {{/if}}
       {{else}}
@@ -90,7 +98,9 @@
 </template>
 
 <template name="photo">
-  <img src="{{photo_url}}" class="photo" />
+  <a class="fancybox" rel="gallery_project_{{projectId}}" href="{{photo_url}}/convert?quality=30">
+    <img src="{{photo_url}}/convert?quality=10" class="photo" />
+  </a>
 </template>
 
 <template name="comment">

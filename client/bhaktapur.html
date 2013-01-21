@@ -15,11 +15,27 @@
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.0/css/font-awesome.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap.no-icons.min.css" rel="stylesheet">
 
-    <link href="/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-    <link href="/bootstrap/css/mystyle.css" rel="stylesheet" type="text/css"/>
-    <link href="/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" type="text/css"/>
-
     <script type="text/javascript" src="//api.filepicker.io/v1/filepicker.js"></script>
+    
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('.fancybox').fancybox({
+          type : 'image',
+          prevEffect : 'none',
+          nextEffect : 'none',
+
+          helpers : {
+            thumbs : {
+              width  : 50,
+              height : 50,
+              source : function( item ) {
+                return item.href.replace("quality=\d", "quality=1");
+              }
+            }
+          }
+        });
+      });
+    </script>
     
     <style type="text/css">
       body {
