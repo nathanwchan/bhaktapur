@@ -8,9 +8,11 @@
       <li>
         <a href="#projects">Completed Projects</a>
       </li>
+      {{#if isLogged}}
       <a data-toggle="modal" href="#addproject">
         <button id="add-project-button" class="btn btn-primary pull-right" type="button"><i class="icon-plus"/> New Project</button>
       </a>
+      {{/if}}
     </ul>
     {{#if projectsLoaded}}
       {{#each projects}}
@@ -68,7 +70,7 @@
       {{#if commentsLoaded}}
         {{#if hasMoreComments}}
           <div class="comments-toggle-link-div">
-            <a id="comments-toggle-link-project-{{projectId}}" class="comments-toggle-link accordion-toggle collapsed" data-toggle="collapse" href="#allcomments-project-{{projectId}}">see {{remainingCommentsCount}} more comments</a>
+            <a id="comments-toggle-link-project-{{projectId}}" class="comments-toggle-link accordion-toggle collapsed" data-toggle="collapse" href="#allcomments-project-{{projectId}}">see {{remainingCommentsCount}} more comment{{#if remainingCommentsCountNotOne}}s{{/if}}</a>
           </div>
           <div id="allcomments-project-{{projectId}}" class="accordion-body collapse" style="height: 0px;">
             {{#each remainingComments}}

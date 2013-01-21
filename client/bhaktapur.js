@@ -45,6 +45,10 @@ Template.projects.projectsLoaded = function () {
 	return Session.get('projectsLoaded');
 };
 
+Template.projects.isLogged = function () {
+  	return (Session.get("accessToken") || null) !== null;
+};
+
 Template.project.isLogged = function () {
   	return (Session.get("accessToken") || null) !== null;
 };
@@ -103,6 +107,10 @@ Template.project.remainingComments = function () {
 
 Template.project.remainingCommentsCount = function () {
 	return getRemainingComments(this._id).length;
+}
+
+Template.project.remainingCommentsCountNotOne = function () {
+	return getRemainingComments(this._id).length !== 1;
 }
 
 Template.project.hasMoreComments = function () {
