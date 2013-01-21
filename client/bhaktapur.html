@@ -29,7 +29,7 @@
               width  : 50,
               height : 50,
               source : function( item ) {
-                return item.href.replace("quality=\d", "quality=1");
+                return item.href + "/convert?quality=1";//.replace("quality=\d", "quality=1");
               }
             }
           }

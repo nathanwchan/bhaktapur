@@ -51,7 +51,7 @@
         {{#if morePhotos}}
           <div class="see-all-photos-link">
             <br><br><br>
-            <a class="fancybox" rel="gallery_project_{{projectId}}" href="{{firstOfRemainingPhotos}}/convert?quality=30">
+            <a class="fancybox" rel="gallery_project_{{projectId}}" href="{{firstOfRemainingPhotos}}">
               show all photos
               <img style="display: none" src="{{firstOfRemainingPhotos}}/convert?quality=10" class="photo" />
             </a>
@@ -100,7 +100,7 @@
 </template>
 
 <template name="photo">
-  <a class="fancybox" rel="gallery_project_{{projectId}}" href="{{photo_url}}/convert?quality=30">
+  <a class="fancybox" rel="gallery_project_{{projectId}}" href="{{photo_url}}">
     <img src="{{photo_url}}/convert?quality=10" class="photo" />
   </a>
 </template>
