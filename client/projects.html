@@ -21,27 +21,27 @@
 </template>
 
 <template name="projects">
-  <div class="projects">
-    {{#if projectsLoaded}}
-      {{#if projectTypeFilterIs "0"}}
-        {{#each projectsType0}}
-          {{> project}}
-        {{/each}}
-      {{else}}
-        {{#if projectTypeFilterIs "1"}}
-          {{#each projectsType1}}
+  {{#if projectsLoaded}}
+    <div class="projects">
+        {{#if projectTypeFilterIs "0"}}
+          {{#each projectsType0}}
             {{> project}}
           {{/each}}
         {{else}}
-          {{#each projectsType2}}
-            {{> project}}
-          {{/each}}
+          {{#if projectTypeFilterIs "1"}}
+            {{#each projectsType1}}
+              {{> project}}
+            {{/each}}
+          {{else}}
+            {{#each projectsType2}}
+              {{> project}}
+            {{/each}}
+          {{/if}}
         {{/if}}
-      {{/if}}
-    {{else}}
-      <i class="icon-spinner icon-spin icon-2x pull-left"></i> Loading projects...
-    {{/if}}
-  </div>
+    </div>
+  {{else}}
+    <i class="icon-spinner icon-spin icon-2x pull-left"></i> Loading projects...
+  {{/if}}
 </template>
 
 <template name="project">
