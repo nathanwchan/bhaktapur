@@ -97,10 +97,26 @@
 	overflow: hidden;
 }
 
+.comment {
+	overflow: auto;
+}
+
 .sign-in-to-comment-div {
 	font-size: 14px;
 	cursor: pointer;
 	margin: 0px 5px 10px;
+}
+
+.comment-left {
+	float: left;
+	width: 40px;
+	height: auto;
+}
+
+.comment-right {
+	float: right;
+	width: 676px;
+	height: auto;
 }
 
 .comment-user-pic {

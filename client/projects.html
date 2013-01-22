@@ -141,8 +141,10 @@
 
 <template name="comment">
   <div class="comment">
-    <a class="comment-user-pic" href="https://www.facebook.com/{{user_id}}/" target="_blank"><img src="https://graph.facebook.com/{{user_id}}/picture?type=square" height="30" width="30"></a>
-    <div class="comment-text">
+    <div class="comment-left">
+      <a class="comment-user-pic" href="https://www.facebook.com/{{user_id}}/" target="_blank"><img src="https://graph.facebook.com/{{user_id}}/picture?type=square" height="30" width="30"></a>
+    </div>
+    <div class="comment-right comment-text">
       <a href="https://www.facebook.com/{{user_id}}/" class="comment-user-name" target="_blank">{{user_name}}</a> {{comment}}
       <p class="comment-date">{{date}}</p>
     </div>
