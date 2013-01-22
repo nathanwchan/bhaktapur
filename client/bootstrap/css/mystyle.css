@@ -23,6 +23,10 @@
 	font-size: 18px;
 }
 
+.projects {
+	margin-top: -30px;
+}
+
 .project {
 	padding: 20px;
 	width: 728px;

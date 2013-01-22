@@ -237,6 +237,8 @@ Template.project.events({
 				$('#submitSpinner-project-' + self._id + '-comment').css("visibility", "hidden");
   				$('#project-' + self._id + '-comment-textbox').attr("value", "");
 				$('#project-' + self._id + '-comment-textbox').removeAttr("disabled");
+				element_to_scroll_to = document.getElementById('project_' + self._id + '_anchor');
+				element_to_scroll_to.scrollIntoView();
 			});
     }
   },
