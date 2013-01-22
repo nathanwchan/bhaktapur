@@ -1,6 +1,7 @@
 <template name="modals">
   {{> addProjectModal}}
   {{> editProjectModal}}
+  {{> markAsCompleteModal}}
 </template>
 
 <template name="addProjectModal">
@@ -110,4 +111,23 @@
 
 <template name="photoToUpload">
   <img src="{{url}}" height="40" width="40"></img>
+</template>
+
+<template name="markAsCompleteModal">
+  <div class="modal hide fade" id="markAsComplete">
+      <input type="hidden" id="projectId_markascomplete">
+      <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">×</button>
+          <h2>Mark project as complete!</h2>
+      </div>   
+      <div class="modal-body">
+          <p id="markascomplete-message"></p>
+      </div>
+      <div class="modal-footer">
+          <i id="submitSpinner_markascomplete" class="icon-spinner icon-spin icon-2x pull-left" style="visibility: hidden;"></i>
+          <a class="btn" data-dismiss="modal">Close</a>
+          <input id="submitButton_markascomplete" type="submit" class="btn btn-primary submit" style="width: 75px;" value="Yup! &raquo;">
+      </div>
+      </form>
+  </div>
 </template>

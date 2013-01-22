@@ -21,6 +21,7 @@
 .inner-container {
 	padding: 20px 40px 40px;
 	font-size: 18px;
+	min-height: 800px;
 }
 
 .projects {
@@ -42,6 +43,11 @@
 .title {
 	font-size: 24px;
 	font-weight: bold;
+}
+
+.checkmark {
+	margin-top: -15px;
+	height: 30px;
 }
 
 .description {

@@ -67,7 +67,7 @@ Template.projectsPage.isLogged = function () {
 };
 
 Template.projects.projectsType0 = function () {
-	return Projects.find({}, {sort: {date: -1}});
+	return Projects.find({type: {$ne: "3"}}, {sort: {date: -1}});
 };
 
 Template.projects.projectsType1 = function () {
@@ -76,6 +76,10 @@ Template.projects.projectsType1 = function () {
 
 Template.projects.projectsType2 = function () {
 	return Projects.find({type: "2"}, {sort: {date: -1}});
+};
+
+Template.projects.projectsType3 = function () {
+	return Projects.find({type: "3"}, {sort: {date: -1}});
 };
 
 Template.projects.projectTypeFilterIs = function (projectTypeFilter) {
@@ -100,6 +104,10 @@ Template.project.userId = function () {
 
 Template.project.projectId = function () {
 	return this._id;
+};
+
+Template.project.isComplete = function () {
+	return this.type === "3";
 };
 
 Template.project.showType = function () {
@@ -221,6 +229,11 @@ Template.project.events({
 	Session.set("photosToUploadJson", null);
 	$('#photosToUploadDiv_edit').empty();
   },
+  "click #mark-as-complete": function () {
+  	var self = this;
+  	$('#projectId_markascomplete').attr("value", self._id);
+  	$('#markascomplete-message').prop("innerHTML", "<b>" + self.name + "</b> is really done???");
+  },
   "keypress input.comment-textbox": function (evt) {
   	var self = this;
     if (evt.which === 13
@@ -261,11 +274,27 @@ Template.users.usersLoaded = function () {
 	return Session.get('usersLoaded');
 };
 
+var scrollToTopOfProjectType = function (type) {
+	Session.set('projectTypeFilter', type.toString());
+	$('.project-nav-tab').each(function(index) {
+		var listitem = $(this);
+		if(index === type) {
+			listitem.addClass('active');
+		}
+		else {
+			listitem.removeClass('active');
+		}
+    });
+	element_to_scroll_to = document.getElementById('projects-anchor');
+	element_to_scroll_to.scrollIntoView();
+	return true;
+}
+
 Template.addProjectModal.events = {
 	'click input.submit': function () {
 		$('#name_error').prop("innerHTML", "");
 		$('#submitButton').attr("disabled", true);
-		$('#submitSpinner').css("visibility", "visible")
+		$('#submitSpinner').css("visibility", "visible");
 		Meteor.call('addProject',
 			$('#name').val(),
 			$('#description').val(),
@@ -276,7 +305,7 @@ Template.addProjectModal.events = {
 				if (!new_project_id) {
 					$('#name_error').prop("innerHTML", "Give the project a name!");
 					$('#submitButton').removeAttr("disabled");
-					$('#submitSpinner').css("visibility", "hidden")
+					$('#submitSpinner').css("visibility", "hidden");
 				}
 				else {
 					$('#addproject').modal('hide');
@@ -296,18 +325,7 @@ Template.addProjectModal.events = {
 							);
 						});
 					}
-  					Session.set('projectTypeFilter', "0");
-					$('.project-nav-tab').each(function(index) {
-						var listitem = $(this);
-						if(index === 0) {
-							listitem.addClass('active');
-						}
-						else {
-							listitem.removeClass('active');
-						}
-				    });
-					element_to_scroll_to = document.getElementById('projects-anchor');
-					element_to_scroll_to.scrollIntoView();
+  					scrollToTopOfProjectType(0);
 				}
 			});
 	},
@@ -334,7 +352,7 @@ Template.editProjectModal.events = {
 	'click input.submit': function () {
 		$('#name_error_edit').prop("innerHTML", "");
 		$('#submitButton_edit').attr("disabled", true);
-		$('#submitSpinner_edit').css("visibility", "visible")
+		$('#submitSpinner_edit').css("visibility", "visible");
 		Meteor.call('editProject',
 			$('#projectId_edit').val(),
 			$('#name_edit').val(),
@@ -346,7 +364,7 @@ Template.editProjectModal.events = {
 				if (!result) {
 					$('#name_error_edit').prop("innerHTML", "Give the project a name!");
 					$('#submitButton_edit').removeAttr("disabled");
-					$('#submitSpinner_edit').css("visibility", "hidden")
+					$('#submitSpinner_edit').css("visibility", "hidden");
 				}
 				else {
 					$('#editproject').modal('hide');
@@ -354,8 +372,7 @@ Template.editProjectModal.events = {
 					$('#submitSpinner_edit').css("visibility", "hidden");
 					$('#name_edit').attr("value", "");
 					$('#description_edit').attr("value", "");
-					element_to_scroll_to = document.getElementById('projects-anchor');
-					element_to_scroll_to.scrollIntoView();
+  					scrollToTopOfProjectType(0);
 				}
 			});
 		if (Session.get("photosToUpload")) {
@@ -396,4 +413,21 @@ Template.editProjectModal.photosToUpload = function () {
 		return photosToUploadString;
 	}
 	return JSON.parse(photosToUploadString);
+};
+
+Template.markAsCompleteModal.events = {
+	'click input.submit': function () {
+		$('#submitButton_markascomplete').attr("disabled", true);
+		$('#submitSpinner_markascomplete').css("visibility", "visible");
+		Meteor.call('markProjectComplete',
+			$('#projectId_markascomplete').val(),
+			Session.get("id"),
+			Session.get("userName"),
+			function (error, result) {
+				$('#markAsComplete').modal('hide');
+				$('#submitButton_markascomplete').removeAttr("disabled");
+				$('#submitSpinner_markascomplete').css("visibility", "hidden");
+  				scrollToTopOfProjectType(3);
+			});
+	}
 };

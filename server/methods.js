@@ -31,6 +31,22 @@ Meteor.methods({
     return true;
   },
 
+  markProjectComplete: function (id, user_id, user_name) {
+    var date = (new Date()).getTime();
+    Projects.update(
+      {_id: id},
+      {$set:
+        {
+          type: "3",
+          date: date,
+          last_modified_by_id: user_id,
+          last_modified_by_name: user_name
+        }
+      }
+    );
+    return true;
+  },
+
   addVolunteer: function (id, name) {
     if (!Volunteers.findOne({id: id}))
     {
