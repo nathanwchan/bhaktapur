@@ -1,0 +1,28 @@
+<template name="navbar">
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="brand" href="#">Bhaktapur</a>
+        <div class="nav-collapse collapse">
+          <ul class="nav">
+            <li class="navbar-tab active" value="0">
+              <a href="#">Home</a>
+            </li>
+            <li class="navbar-tab" value="1">
+              <a href="#projects">Projects</a>
+            </li>
+            <!-- <li class="navbar-tab">
+              <a href="#volunteers">Past Volunteers</a>
+            </li> -->
+            <li class="navbar-tab" value="2">
+              <a href="#suggestions">Suggestions</a>
+            </li>
+          </ul>
+        </div>
+        <div class="pull-right">
+          {{> fbLogin}}
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

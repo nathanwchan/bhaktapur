@@ -1,5 +1,6 @@
 Meteor.startup(function () {
 	filepicker.setKey('AGtZv8CFvQABLy5q9bn2Lz');
+	Session.set('page', 0);
 });
 
 Meteor.subscribe("users", function(){
@@ -29,6 +30,29 @@ Meteor.subscribe("comments", function(){
 Meteor.subscribe("photos", function(){
 	Session.set('photosLoaded', true);
 });
+
+Template.navbar.events({
+  "click .navbar-tab": function (event) {
+  	var navbarLinkClicked = event.currentTarget;
+  	$('.navbar-tab').each(function() {
+		var navbarLink = $(this);
+		if(navbarLink.get(0) === navbarLinkClicked) {
+			navbarLink.addClass('active');
+			Session.set('page', navbarLink.get(0).value);
+		}
+		else {
+			navbarLink.removeClass('active');
+		}
+    });
+  }
+});
+
+Template.pages.pageIs = function (page) {
+	if(Session.get('page')){
+		return Session.get('page').toString() === page;
+	}
+	return false;
+};
 
 Template.volunteers.volunteers = function () {
 	return Volunteers.find({}, {sort: {name: -1}});

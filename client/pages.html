@@ -1,0 +1,9 @@
+<template name="pages">
+  	<a id="projects-anchor" name="projects"></a>
+  	<a name="suggestions"></a>
+	{{#if pageIs "2"}}
+  		{{> suggestionsPage}}
+	{{else}}
+		{{> projectsPage}}
+	{{/if}}
+</template>
