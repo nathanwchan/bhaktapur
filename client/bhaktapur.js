@@ -15,6 +15,7 @@ Meteor.subscribe("users", function(){
 
 Meteor.subscribe("projects", function(){
 	Session.set('projectsLoaded', true);
+	Session.set('projectTypeFilter', "0")
 });
 
 Meteor.subscribe("volunteers", function(){
@@ -37,16 +38,32 @@ Template.volunteers.volunteersLoaded = function () {
 	return Session.get('volunteersLoaded');
 };
 
-Template.projects.projects = function () {
+Template.projectsPage.isLogged = function () {
+  	return (Session.get("accessToken") || null) !== null;
+};
+
+Template.projects.projectsType0 = function () {
 	return Projects.find({}, {sort: {date: -1}});
+};
+
+Template.projects.projectsType1 = function () {
+	return Projects.find({type: "1"}, {sort: {date: -1}});
+};
+
+Template.projects.projectsType2 = function () {
+	return Projects.find({type: "2"}, {sort: {date: -1}});
+};
+
+Template.projects.projectTypeFilterIs = function (projectTypeFilter) {
+	return Session.get('projectTypeFilter') === projectTypeFilter;
 };
 
 Template.projects.projectsLoaded = function () {
 	return Session.get('projectsLoaded');
 };
 
-Template.projects.isLogged = function () {
-  	return (Session.get("accessToken") || null) !== null;
+Template.projects.projectTypeFilter = function () {
+	return Session.get('projectTypeFilter');
 };
 
 Template.project.isLogged = function () {
@@ -59,6 +76,17 @@ Template.project.userId = function () {
 
 Template.project.projectId = function () {
 	return this._id;
+};
+
+Template.project.showType = function () {
+	return Session.get('projectTypeFilter') === "0";
+};
+
+Template.project.type = function () {
+	if (this.type) {
+		return projectTypes[this.type];
+	}
+	return projectTypes["0"];
 };
 
 Template.project.photosLoaded = function () {
@@ -125,11 +153,17 @@ Template.comment.date = function () {
 	return moment(this.date).fromNow();
 }
 
-Template.projects.events({
+Template.projectsPage.events({
   "click #add-project-button": function () {
 	Session.set("photosToUpload", false);
 	Session.set("photosToUploadJson", null);
 	$('#photosToUploadDiv').empty();
+  },
+  "click .project-nav-tab-link": function (event) {
+  	var navTabLinkValue = event.currentTarget.getAttribute("value");
+  	Session.set('projectTypeFilter', navTabLinkValue);
+  	element_to_scroll_to = document.getElementById('projects-anchor');
+	element_to_scroll_to.scrollIntoView();
   }
 });
 
@@ -141,9 +175,24 @@ Template.project.events({
     showLoginPopup();
   },
   "click #edit-project": function () {
-  	$('#projectId_edit').attr("value", this._id)
-  	$('#name_edit').attr("value", this.name);
-	$('#description_edit').attr("value", this.description);
+  	var self = this;
+  	$('#projectId_edit').attr("value", self._id)
+  	$('#name_edit').attr("value", self.name);
+	$('#description_edit').attr("value", self.description);
+	var projectType = "0";
+	if (self.type) {
+		projectType = self.type;
+	}
+	$('#project_type_button_value_edit').attr("value", projectType);
+	$('.project-type-button-edit').each(function(index) {
+		var button = $(this);
+		if(projectType === (index+1).toString()) {
+			button.addClass('active');
+		}
+		else {
+			button.removeClass('active');
+		}
+    });
 	Session.set("photosToUpload", false);
 	Session.set("photosToUploadJson", null);
 	$('#photosToUploadDiv_edit').empty();
@@ -194,6 +243,7 @@ Template.addProjectModal.events = {
 		Meteor.call('addProject',
 			$('#name').val(),
 			$('#description').val(),
+			$('#project_type_button_value').val(),
 			Session.get("id"),
 			Session.get("userName"),
 			function (error, new_project_id) {
@@ -220,8 +270,23 @@ Template.addProjectModal.events = {
 							);
 						});
 					}
+  					Session.set('projectTypeFilter', "0");
+					$('.project-nav-tab').each(function(index) {
+						var listitem = $(this);
+						if(index === 0) {
+							listitem.addClass('active');
+						}
+						else {
+							listitem.removeClass('active');
+						}
+				    });
+					element_to_scroll_to = document.getElementById('projects-anchor');
+					element_to_scroll_to.scrollIntoView();
 				}
 			});
+	},
+	'click .project-type-button': function(event) {
+		$('#project_type_button_value').attr("value", event.currentTarget.value);
 	},
 	'click #uploadPhotosButton': function() {
 		return filepicker.pickAndStore({multiple: true},{},function(fpfiles){
@@ -248,6 +313,7 @@ Template.editProjectModal.events = {
 			$('#projectId_edit').val(),
 			$('#name_edit').val(),
 			$('#description_edit').val(),
+			$('#project_type_button_value_edit').val(),
 			Session.get("id"),
 			Session.get("userName"),
 			function (error, result) {
@@ -262,6 +328,8 @@ Template.editProjectModal.events = {
 					$('#submitSpinner_edit').css("visibility", "hidden");
 					$('#name_edit').attr("value", "");
 					$('#description_edit').attr("value", "");
+					element_to_scroll_to = document.getElementById('projects-anchor');
+					element_to_scroll_to.scrollIntoView();
 				}
 			});
 		if (Session.get("photosToUpload")) {
@@ -276,6 +344,9 @@ Template.editProjectModal.events = {
 				);
 			});
 		}
+	},
+	'click .project-type-button-edit': function(event) {
+		$('#project_type_button_value_edit').attr("value", event.currentTarget.value);
 	},
 	'click #uploadPhotosButton_edit': function() {
 		return filepicker.pickAndStore({multiple: true},{},function(fpfiles){
@@ -300,7 +371,3 @@ Template.editProjectModal.photosToUpload = function () {
 	}
 	return JSON.parse(photosToUploadString);
 };
-
-Template.editProjectModal.nathan = function () {
-	return Session.get("photosToUploadJson");
-}

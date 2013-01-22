@@ -1,23 +1,44 @@
-<template name="projects">
-  <a name="projects"></a>
-  <div class="projects">
-    <ul class="nav nav-tabs">
-      <li class="active">
-        <a href="#projects">All Projects</a>
+<template name="projectsPage">
+  <a id="projects-anchor" name="projects"></a>
+  <div class="projectsPage">
+    <ul id="projects-nav-tabs" class="nav nav-tabs">
+      <li class="project-nav-tab active">
+        <a class="project-nav-tab-link" href="#projects" data-toggle="tab" value="0">All Projects</a>
       </li>
-      <li>
-        <a href="#projects">Completed Projects</a>
+      <li class="project-nav-tab">
+        <a class="project-nav-tab-link" href="#projects" data-toggle="tab" value="1">One-time Projects</a>
+      </li>
+      <li class="project-nav-tab">
+        <a class="project-nav-tab-link" href="#projects" data-toggle="tab" value="2">Day-to-day Projects</a>
       </li>
       {{#if isLogged}}
-      <a data-toggle="modal" href="#addproject">
-        <button id="add-project-button" class="btn btn-primary pull-right" type="button"><i class="icon-plus"/> New Project</button>
-      </a>
+        <a data-toggle="modal" href="#addproject">
+          <button id="add-project-button" class="btn btn-primary pull-right" type="button"><i class="icon-plus"/> New Project</button>
+        </a>
       {{/if}}
     </ul>
+    {{> projects}}
+  </div>
+</template>
+
+<template name="projects">
+  <div class="projects">
     {{#if projectsLoaded}}
-      {{#each projects}}
-        {{> project}}
-      {{/each}}
+      {{#if projectTypeFilterIs "0"}}
+        {{#each projectsType0}}
+          {{> project}}
+        {{/each}}
+      {{else}}
+        {{#if projectTypeFilterIs "1"}}
+          {{#each projectsType1}}
+            {{> project}}
+          {{/each}}
+        {{else}}
+          {{#each projectsType2}}
+            {{> project}}
+          {{/each}}
+        {{/if}}
+      {{/if}}
     {{else}}
       <i class="icon-spinner icon-spin icon-2x pull-left"></i> Loading projects...
     {{/if}}
@@ -41,6 +62,9 @@
     </div>
     <p class="title">{{name}}</p>
     <p class="description">{{description}}</p>
+    {{#if showType}}
+      <p class="type">[{{type}} project]</p>
+    {{/if}}
     <p class="last-modified-by">last modified {{date}} by <a href="https://www.facebook.com/{{last_modified_by_id}}/" target="_blank">{{last_modified_by_name}}</a></p>
 
     <div class="photos">
