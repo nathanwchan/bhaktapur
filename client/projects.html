@@ -48,7 +48,7 @@
       {{/if}}
     </div>
   {{else}}
-    <i class="icon-spinner icon-spin icon-2x pull-left"></i> Loading projects...
+    <i class="icon-spinner icon-spin icon-2x pull-left"></i><p class="loading-text">Loading projects...</p>
   {{/if}}
 </template>
 
@@ -97,7 +97,7 @@
           </div>
         {{/if}}
       {{else}}
-        <i class="icon-spinner icon-spin icon-2x pull-left"></i> Loading photos...
+        <i class="icon-spinner icon-spin icon-2x pull-left"></i><p class="loading-text">Loading photos...</p>
       {{/if}}
     </div>
     <div class="comments">
@@ -116,7 +116,7 @@
           {{> comment}}
         {{/each}}
       {{else}}
-        <i class="icon-spinner icon-spin icon-2x pull-left"></i> Loading comments...
+        <i class="icon-spinner icon-spin icon-2x pull-left"></i><p class="loading-text">Loading comments...</p>
       {{/if}}
       {{#if isLogged}}
       <div>

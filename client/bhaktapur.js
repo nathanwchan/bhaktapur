@@ -185,6 +185,10 @@ Template.comment.date = function () {
 	return moment(this.date).fromNow();
 }
 
+Template.suggestionsPage.projectId = function () {
+	return suggestionProjectId;
+}
+
 Template.projectsPage.events({
   "click #add-project-button": function () {
 	Session.set("photosToUpload", false);
@@ -431,3 +435,48 @@ Template.markAsCompleteModal.events = {
 			});
 	}
 };
+
+Template.suggestionsPage.projectId = function () {
+	return suggestionProjectId;
+}
+
+Template.suggestionsPage.isLogged = function () {
+  	return (Session.get("accessToken") || null) !== null;
+};
+
+Template.suggestionsPage.userId = function () {
+	return Session.get("id");
+};
+
+Template.suggestionsPage.commentsLoaded = function () {
+	return Session.get('commentsLoaded');
+}
+
+Template.suggestionsPage.suggestions = function () {
+	return Comments.find({project_id: suggestionProjectId}, {sort: {date: -1}}).fetch().reverse();
+}
+
+Template.suggestionsPage.events({
+  "click #sign-in-to-suggest": function () {
+    showLoginPopup();
+  },
+  "keypress input.comment-textbox": function (evt) {
+  	var self = this;
+    if (evt.which === 13
+    	&& $('#project-' + suggestionProjectId + '-suggest-textbox').val() !== ""
+    	&& $('#project-' + suggestionProjectId + '-suggest-textbox').attr('disabled') !== "disabled") {
+    	$('#submitSpinner-project-' + suggestionProjectId + '-suggest').css("visibility", "visible");
+		$('#project-' + suggestionProjectId + '-suggest-textbox').attr("disabled", true);
+		Meteor.call('addComment',
+			suggestionProjectId,
+			Session.get("id"),
+			Session.get("userName"),
+			$('#project-' + suggestionProjectId + '-suggest-textbox').val(),
+			function (error, result) {
+				$('#submitSpinner-project-' + suggestionProjectId + '-suggest').css("visibility", "hidden");
+  				$('#project-' + suggestionProjectId + '-suggest-textbox').attr("value", "");
+				$('#project-' + suggestionProjectId + '-suggest-textbox').removeAttr("disabled");
+			});
+    }
+  }
+});

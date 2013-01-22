@@ -1,5 +1,37 @@
 <template name="suggestionsPage">
   <div class="suggestionsPage">
-Suggestions!!!  Coming soon...
+    <h1>Suggestions!</h1>
+    <br>
+    Some initial ideas:
+    <ul>
+      <li>an "immediate needs" list for each project (donations, information, hands-on help, etc..) </li>
+      <li>a "current status" field for each project (kinda like a Twitter update)</li>
+      <li>volunteer page</li>
+    </ul>
+    Also, help me think of a name for the site!  It'd be nice to have a clean .com domain.
+    <br><br>
+    Any other suggestions/feedback?  Leave it here!
+    <br>
+    <div class="comments">
+      {{#if commentsLoaded}}
+        {{#if isLogged}}
+          <div>
+            <img src="https://graph.facebook.com/{{userId}}/picture?type=square" class="comment-user-pic" height="30" width="30" />
+            <input id="project-{{projectId}}-suggest-textbox" class="comment-textbox" type="text" placeholder="Write a suggestion..." autocomplete="off">
+            <i id="submitSpinner-project-{{projectId}}-suggest" class="icon-spinner icon-spin icon-2x" style="visibility: hidden;"></i>
+          </div>
+          {{else}}
+          <div class="sign-in-to-comment-div">
+            <a id="sign-in-to-suggest">Sign in with Facebook to leave a suggestion</a>
+          </div>
+        {{/if}}
+        {{#each suggestions}}
+          {{> comment}}
+        {{/each}}
+      {{else}}
+        <i class="icon-spinner icon-spin icon-2x pull-left"></i><p class="loading-text">Loading suggestions...</p>
+      {{/if}}
+    </div>
+  </div>
   </div>
 </template>
