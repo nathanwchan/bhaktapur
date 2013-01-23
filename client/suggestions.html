@@ -7,6 +7,8 @@
       <li>an "immediate needs" list for each project (donations, information, hands-on help, etc..) </li>
       <li>a "current status" field for each project (kinda like a Twitter update)</li>
       <li>volunteer page</li>
+      <li>funding page</li>
+      <li>forum - a spot where people can talk about whatever, ask questions and make suggestions</li>
     </ul>
     Also, help me think of a name for the site!  It'd be nice to have a clean .com domain.
     <br><br>
@@ -14,6 +16,9 @@
     <br>
     <div class="comments">
       {{#if commentsLoaded}}
+        {{#each suggestions}}
+          {{> comment}}
+        {{/each}}
         {{#if isLogged}}
           <div>
             <img src="https://graph.facebook.com/{{userId}}/picture?type=square" class="comment-user-pic" height="30" width="30" />
@@ -25,9 +30,6 @@
             <a id="sign-in-to-suggest">Sign in with Facebook to leave a suggestion</a>
           </div>
         {{/if}}
-        {{#each suggestions}}
-          {{> comment}}
-        {{/each}}
       {{else}}
         <i class="icon-spinner icon-spin icon-2x pull-left"></i><p class="loading-text">Loading suggestions...</p>
       {{/if}}
