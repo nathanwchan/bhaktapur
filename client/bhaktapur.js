@@ -44,6 +44,8 @@ Template.navbar.events({
 			navbarLink.removeClass('active');
 		}
     });
+    element_to_scroll_to = document.getElementById('projects-anchor');
+    element_to_scroll_to.scrollIntoView();
   }
 });
 

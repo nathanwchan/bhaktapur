@@ -1,3 +1,8 @@
+.navbar-tab,
+.project-nav-tab {
+	cursor: pointer;
+}
+
 .navbar-userpic {
 	margin-top: -2px;
 	margin-right: 2px;
