@@ -1,11 +1,14 @@
 var appConfig = (function () {
   var isLocalhost = window.location.href.indexOf("localhost") != -1;
+  var isMeteor = window.location.href.indexOf("meteor") != -1;
 
   var appId;
   if (isLocalhost) {
     appId = "223439917791780";
-  } else {
+  } else if (isMeteor) {
     appId = "295298057240263";
+  } else {
+    appid = "154271161389541";
   }
   
   return {
