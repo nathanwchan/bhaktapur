@@ -1,1 +1,1 @@
-web: node bhaktapur.js
+web: node web.js
