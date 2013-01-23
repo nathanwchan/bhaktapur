@@ -5,10 +5,12 @@ var appConfig = (function () {
   var appId;
   if (isLocalhost) {
     appId = "223439917791780";
-  } else if (isMeteor) {
+  }
+  else if (isMeteor) {
     appId = "295298057240263";
-  } else {
-    appid = "154271161389541";
+  }
+  else {
+    appId = "154271161389541";
   }
   
   return {
